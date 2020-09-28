@@ -80,7 +80,8 @@ namespace raspicam {
         RASPICAM_AWB_FLUORESCENT,
         RASPICAM_AWB_INCANDESCENT,
         RASPICAM_AWB_FLASH,
-        RASPICAM_AWB_HORIZON
+        RASPICAM_AWB_HORIZON,
+        RASPICAM_AWB_GREYWORLD
     }  ;
 
     /**Image effects

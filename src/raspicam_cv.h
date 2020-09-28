@@ -1,7 +1,7 @@
 /**********************************************************
- Software developed by AVA ( Ava Group of the University of Cordoba, ava  at uco dot es)
- Main author Rafael Munoz Salinas (rmsalinas at uco dot es)
- This software is released under BSD license as expressed below
+ Software developed by AVA ( Ava Group of the University of Cordoba, ava  at uco
+dot es) Main author Rafael Munoz Salinas (rmsalinas at uco dot es) This software
+is released under BSD license as expressed below
 -------------------------------------------------------------------
 Copyright (c) 2013, AVA ( Ava Group University of Cordoba, ava  at uco dot es)
 All rights reserved.
@@ -17,7 +17,8 @@ are met:
 3. All advertising materials mentioning features or use of this software
    must display the following acknowledgement:
 
-   This product includes software developed by the Ava group of the University of Cordoba.
+   This product includes software developed by the Ava group of the University
+of Cordoba.
 
 4. Neither the name of the University nor the names of its contributors
    may be used to endorse or promote products derived from this software
@@ -40,60 +41,54 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include "raspicam.h"
-namespace raspicam  {
+namespace raspicam {
 
-    /**Class for using Raspberry camera as in opencv
-    */
-    class RaspiCam_Cv :public RaspiCam{
-         public:
-        /**Constructor
-         */
-        RaspiCam_Cv();
-        /**Destructor
-         */
-        ~RaspiCam_Cv();
+/**Class for using Raspberry camera as in opencv
+ */
+class RaspiCam_Cv : public RaspiCam {
+ public:
+  /**Constructor
+   */
+  RaspiCam_Cv();
+  /**Destructor
+   */
+  ~RaspiCam_Cv();
 
-        /**
-        *Decodes and returns the grabbed video frame.
-         */
-        void retrieve ( cv::Mat& image );
+  /**
+   *Decodes and returns the grabbed video frame.
+   */
+  void retrieve(cv::Mat& image);
 
-        /**Returns the specified VideoCapture property
-         */
+  /**Returns the specified VideoCapture property
+   */
+  double get(int propId);
 
-        double get ( int propId );
+  /**Sets a property in the VideoCapture.
+   *
+   *
+   * Implemented properties:
+   * CV_CAP_PROP_FRAME_WIDTH,CV_CAP_PROP_FRAME_HEIGHT,
+   * CV_CAP_PROP_FORMAT: CV_8UC1 or CV_8UC3
+   * CV_CAP_PROP_BRIGHTNESS: [0,100]
+   * CV_CAP_PROP_CONTRAST: [0,100]
+   * CV_CAP_PROP_SATURATION: [0,100]
+   * CV_CAP_PROP_GAIN: (iso): [0,100]
+   * CV_CAP_PROP_EXPOSURE: -1 auto. [1,100] shutter speed from 0 to 33ms
+   * CV_CAP_PROP_WHITE_BALANCE_RED_V : [1,100] -1 auto whitebalance
+   * CV_CAP_PROP_WHITE_BALANCE_BLUE_U : [1,100] -1 auto whitebalance
+   * CV_CAP_PROP_FPS
+   */
+  bool set(int propId, double value);
 
-        /**Sets a property in the VideoCapture. 
-	 * 
-	 * 
-	 * Implemented properties:
-	 * CV_CAP_PROP_FRAME_WIDTH,CV_CAP_PROP_FRAME_HEIGHT,
-	 * CV_CAP_PROP_FORMAT: CV_8UC1 or CV_8UC3
-	 * CV_CAP_PROP_BRIGHTNESS: [0,100]
-	 * CV_CAP_PROP_CONTRAST: [0,100]
-	 * CV_CAP_PROP_SATURATION: [0,100]
-	 * CV_CAP_PROP_GAIN: (iso): [0,100]
-	 * CV_CAP_PROP_EXPOSURE: -1 auto. [1,100] shutter speed from 0 to 33ms
-     * CV_CAP_PROP_WHITE_BALANCE_RED_V : [1,100] -1 auto whitebalance
-     * CV_CAP_PROP_WHITE_BALANCE_BLUE_U : [1,100] -1 auto whitebalance
-     * CV_CAP_PROP_FPS
-         */
+  /** Returns the camera identifier. We assume the camera id is the one of the
+   * raspberry obtained using raspberry serial number obtained in /proc/cpuinfo
+   */
+  std::string getId() const;
 
-        bool set ( int propId, double value );
-
-        /** Returns the camera identifier. We assume the camera id is the one of the raspberry obtained using raspberry serial number obtained in /proc/cpuinfo
-         */
-        std::string getId()const;
-
-
-
-
-        private:
-        cv::Mat _image;
-        int imgFormat;//required image format //
-     };
-
+ private:
+  cv::Mat _image;
+  int imgFormat;  // required image format //
 };
+
+};  // namespace raspicam
 #endif
-
-
