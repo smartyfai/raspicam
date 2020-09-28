@@ -127,6 +127,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_ENCODING_BAYER_SGBRG12P   MMAL_FOURCC('p','G','1','2')  //GBRG
 #define MMAL_ENCODING_BAYER_SRGGB12P   MMAL_FOURCC('p','R','1','2')  //RGGB
 
+//14 bit per pixel Bayer formats.
+#define MMAL_ENCODING_BAYER_SBGGR14P   MMAL_FOURCC('p','B','E','E')  //BGGR
+#define MMAL_ENCODING_BAYER_SGBRG14P   MMAL_FOURCC('p','G','E','E')  //GBRG
+#define MMAL_ENCODING_BAYER_SGRBG14P   MMAL_FOURCC('p','g','E','E')  //GRBG
+#define MMAL_ENCODING_BAYER_SRGGB14P   MMAL_FOURCC('p','R','E','E')  //RGGB
+
 //16 bit per pixel Bayer formats.
 #define MMAL_ENCODING_BAYER_SBGGR16    MMAL_FOURCC('B','G','1','6')  //BGGR
 #define MMAL_ENCODING_BAYER_SGBRG16    MMAL_FOURCC('G','B','1','6')  //GBRG
@@ -139,11 +145,24 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_ENCODING_BAYER_SGRBG10DPCM8 MMAL_FOURCC('B','D','1','0')  //GRBG
 #define MMAL_ENCODING_BAYER_SRGGB10DPCM8 MMAL_FOURCC('b','R','A','8')  //RGGB
 
+//MIPI packed monochrome images
+#define MMAL_ENCODING_GREY    MMAL_FOURCC('G', 'R', 'E', 'Y') //8bpp Greyscale
+#define MMAL_ENCODING_Y10P    MMAL_FOURCC('Y', '1', '0', 'P') //10bpp  Greyscale, MIPI RAW10 packed
+#define MMAL_ENCODING_Y12P    MMAL_FOURCC('Y', '1', '2', 'P') //12bpp  Greyscale, MIPI RAW12 packed
+#define MMAL_ENCODING_Y14P    MMAL_FOURCC('Y', '1', '4', 'P') //14bpp  Greyscale, MIPI RAW14 packed
+#define MMAL_ENCODING_Y16     MMAL_FOURCC('Y', '1', '6', ' ') //16bpp  Greyscale
+
 /** SAND Video (YUVUV128) format, native format understood by VideoCore.
  * This format is *not* opaque - if requested you will receive full frames
  * of YUV_UV video.
  */
 #define MMAL_ENCODING_YUVUV128         MMAL_FOURCC('S','A','N','D')
+/** HEVC codec format. YUV 420, 10bpc, arranged with 3 values packed into
+ * 4 bytes with 2 bits of padding.
+ * The image is split into columns or 128 bytes / 96 samples wide, with the
+ * column of luma first, followed by the column of sample interleaved chroma.
+ */
+#define MMAL_ENCODING_YUV10_COL	       MMAL_FOURCC('Y','1','0','C')
 /** 16 bit SAND Video (YUVUV64_16) format.
  * This format is *not* opaque - if requested you will receive full frames
  * of YUV_UV_16 video.
@@ -161,6 +180,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /** An EGL image handle
  */
 #define MMAL_ENCODING_EGL_IMAGE        MMAL_FOURCC('E','G','L','I')
+
+/** ISP image statistics format
+ */
+#define MMAL_ENCODING_BRCM_STATS       MMAL_FOURCC('S','T','A','T')
 
 /* }@ */
 
@@ -267,6 +290,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_COLOR_SPACE_BT470_2_BG    MMAL_FOURCC('Y','_','B','G')
 /** JPEG JFIF, but with 16..255 luma */
 #define MMAL_COLOR_SPACE_JFIF_Y16_255  MMAL_FOURCC('Y','Y','1','6')
+/** Rec2020 */
+#define MMAL_COLOR_SPACE_REC2020       MMAL_FOURCC('2','0','2','0')
 /* @} MmalColorSpace List */
 
 #endif /* MMAL_ENCODINGS_H */
