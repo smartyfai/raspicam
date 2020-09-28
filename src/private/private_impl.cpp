@@ -716,6 +716,8 @@ namespace raspicam {
                 return MMAL_PARAM_AWBMODE_FLASH;
             case RASPICAM_AWB_HORIZON:
                 return MMAL_PARAM_AWBMODE_HORIZON;
+            case RASPICAM_AWB_GREYWORLD:
+                return MMAL_PARAM_AWBMODE_GREYWORLD;
             default:
                 return MMAL_PARAM_AWBMODE_AUTO;
             }
